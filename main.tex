@@ -1,0 +1,79 @@
+\documentclass[12pt]{report}
+
+%-------------------- packages ---------------------%
+\usepackage{lmodern} % Load lmodern font
+\usepackage[french]{babel} % French language support
+\usepackage[utf8]{inputenc} % UTF-8 encoding
+\usepackage[T1]{fontenc} % Output font encoding
+\usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry} % Page margins
+\usepackage{quoting} % For quoting environment
+\usepackage{graphicx} % For including graphics
+\usepackage{hyperref} % For hyperlinks
+\usepackage{changepage} % For adjusting page margins
+\usepackage{subcaption} % For sub-captions
+\usepackage[footnote]{acronym} % For acronyms
+\usepackage{blindtext} % For dummy text
+\usepackage[dvipsnames]{xcolor} % For color
+\usepackage{amsmath,amsfonts,amssymb} % For math symbols and fonts
+\usepackage{makeidx} % For indexing
+\usepackage{colortbl} % For colored tables
+\usepackage{float} % For floating objects
+\usepackage{wrapfig} % For wrapped figures
+\usepackage{placeins} % For keeping floats in sections
+\usepackage{titlesec} % For customizing section titles
+\usepackage{tikz}
+\definecolor{orangecustom}{RGB}{230,115,0}
+
+\geometry{margin=2cm}
+
+%-------------------- Customizations ---------------------%
+\renewcommand{\footnotesize}{\fontsize{7pt}{9pt}\selectfont} % Smaller footnotes
+\setcounter{tocdepth}{3} % Depth of the table of contents
+\setcounter{secnumdepth}{3} % Depth of section numbering
+\renewcommand{\tablename}{Tableau} % Table name
+\renewcommand{\figurename}{Figure} % Figure name
+
+% Customize chapter title spacing
+\titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter}{1em}{}
+\titlespacing*{\chapter}{0pt}{-1cm}{2cm} % Adjust space before and after chapter title
+
+%-------------------- Bibliography ---------------------%
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{./references.bib}
+
+%-------------------- Annexes ---------------------%
+\usepackage[page,toc,titletoc,title]{appendix}
+\addto\captionsfrench{%
+	\renewcommand\appendixname{Annexe}
+	\renewcommand\appendixpagename{Annexes}
+	\renewcommand{\appendixtocname}{Annexes}
+}
+
+\begin{document}
+    % Insert the title page
+    \pagestyle{empty} % Remove page number from title page
+    \include{pages/00-page-de-garde}
+
+    \newpage % Ensure the title page ends and the next page starts cleanly
+
+    \pagenumbering{roman} % Roman page numbers for preliminary pages
+    \setcounter{page}{1}
+    \include{pages/01-Remerciements} % Acknowledgments
+    
+    \tableofcontents
+    \clearpage
+    \listoffigures
+    \clearpage
+
+    %----------- Main Content --------------%
+    %----------- Main Content --------------%
+    \pagenumbering{arabic} % Arabic page numbers for main content
+    \setcounter{page}{1}
+    \include{pages/02-into-gene}
+    \include{pages/05-presentation-entreprise}
+    \include{pages/06-stage}
+    \include{pages/07-chapitre-realisation}
+    \include{pages/08-conclusion-perspectives}
+    \include{pages/09-annexes} %% Note: `09-annexes.tex` is replaced by `09-annexes`
+
+\end{document}
