@@ -5,7 +5,7 @@
 \usepackage[french]{babel} % French language support
 \usepackage[utf8]{inputenc} % UTF-8 encoding
 \usepackage[T1]{fontenc} % Output font encoding
-\usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry} % Page margins
+\usepackage[top=2cm,bottom=2.5cm,right=2cm,left=2cm]{geometry} % Initial Page margins
 \usepackage{quoting} % For quoting environment
 \usepackage{graphicx} % For including graphics
 \usepackage{hyperref} % For hyperlinks
@@ -21,10 +21,11 @@
 \usepackage{wrapfig} % For wrapped figures
 \usepackage{placeins} % For keeping floats in sections
 \usepackage{titlesec} % For customizing section titles
+\usepackage{fancyhdr} % For headers and footers
 \usepackage{tikz}
-\definecolor{orangecustom}{RGB}{230,115,0}
+\usepackage{afterpage} % For changing the geometry on specific pages
 
-\geometry{margin=2cm}
+\definecolor{orangecustom}{RGB}{230,115,0}
 
 %-------------------- Customizations ---------------------%
 \renewcommand{\footnotesize}{\fontsize{7pt}{9pt}\selectfont} % Smaller footnotes
@@ -49,15 +50,28 @@
 	\renewcommand{\appendixtocname}{Annexes}
 }
 
+% Configure fancyhdr for chapter title in the header
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[L]{\leftmark} % Chapter title in the left header
+\fancyhead[R]{\thepage} % Page number in the right header
+\renewcommand{\headrulewidth}{0.4pt} % Line thickness for the header
+
+% Apply different margins after the title page
+
 \begin{document}
     % Insert the title page
     \pagestyle{empty} % Remove page number from title page
-    \include{pages/00-page-de-garde}
+    \include{pages/00-page-de-garde} % First page remains with the original margin
+\newgeometry{top=2.5cm, bottom=2.5cm, right=2cm, left=3.5cm}
 
-    \newpage % Ensure the title page ends and the next page starts cleanly
+    \newpage % Ensure the first page ends cleanly
 
+    % Change margins and apply the fancy header with chapter title
+    \pagestyle{fancy}
     \pagenumbering{roman} % Roman page numbers for preliminary pages
     \setcounter{page}{1}
+
     \include{pages/01-Remerciements} % Acknowledgments
     
     \tableofcontents
@@ -66,14 +80,14 @@
     \clearpage
 
     %----------- Main Content --------------%
-    %----------- Main Content --------------%
     \pagenumbering{arabic} % Arabic page numbers for main content
     \setcounter{page}{1}
+    
     \include{pages/02-into-gene}
     \include{pages/05-presentation-entreprise}
     \include{pages/06-stage}
     \include{pages/07-chapitre-realisation}
     \include{pages/08-conclusion-perspectives}
-    \include{pages/09-annexes} %% Note: `09-annexes.tex` is replaced by `09-annexes`
+    \include{pages/09-annexes} % Note: `09-annexes.tex` is replaced by `09-annexes`
 
 \end{document}
